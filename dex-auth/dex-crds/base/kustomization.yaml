@@ -76,6 +76,20 @@ vars:
     apiVersion: v1
   fieldref:
     fieldpath: data.application_secret
+- name: google_client_id
+  objref:
+    kind: ConfigMap
+    name: dex-parameters
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.google_client_id
+- name: google_secret_id
+  objref:
+    kind: ConfigMap
+    name: dex-parameters
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.google_secret_id
 configurations:
 - params.yaml
 images:
