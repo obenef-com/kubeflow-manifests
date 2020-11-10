@@ -37,7 +37,7 @@ data:
        config:
          issuer: https://accounts.google.com
          # Google Client ID
-         clientID: 
+         clientID: $(google_client_id)
          # Google Client 시크릿 ID
-         clientSecret:
+         clientSecret: $(google_secret_id)
          redirectURI: $(issuer)/callback
