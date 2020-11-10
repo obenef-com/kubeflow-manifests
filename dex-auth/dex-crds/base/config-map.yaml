@@ -1,0 +1,43 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dex
+data:
+  config.yaml: |
+    issuer: $(issuer)
+    storage:
+      type: kubernetes
+      config:
+        inCluster: true
+    web:
+      http: 0.0.0.0:5556
+    logger:
+      level: "debug"
+      format: text
+    oauth2:
+      skipApprovalScreen: true
+    enablePasswordDB: true
+    staticPasswords:
+    - email: $(static_email)
+      hash: $(static_password_hash)
+      username: $(static_username)
+      userID: $(static_user_id)
+    staticClients:
+    - id: $(client_id)
+      redirectURIs: $(oidc_redirect_uris)
+      name: 'Dex Login Application'
+      secret: $(application_secret)
+    connectors:
+     - type: oidc
+       # Required field for connector id.
+       id: google
+       # Required field for connector name.
+       name: Google
+       config:
+         issuer: https://accounts.google.com
+         # Google Client ID
+         clientID: 
+         # Google Client 시크릿 ID
+         clientSecret:
+         redirectURI: $(issuer)/callback
